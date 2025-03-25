@@ -48,3 +48,5 @@ curl -X GET http://localhost:3000/metrics
 - url - `http://localhost:3001`
 - username - `admin`
 - password - `admin`
+
+look for the counter `http_requests_total`
