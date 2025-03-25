@@ -5,8 +5,20 @@ import userRoutes from "./routes/userRoutes";
 import { User } from "./entities/User";
 import logger from "./utils/logger";
 import pinoHttp from "pino-http";
+import client from "prom-client";
 
 const app = express();
+
+client.collectDefaultMetrics();
+
+app.use((req, res, next) => {
+  res.on("finish", () => {
+    httpRequestCounter
+      .labels(req.method, req.path, res.statusCode.toString())
+      .inc();
+  });
+  next();
+});
 
 app.use(express.json());
 app.use(pinoHttp({ logger }));
@@ -23,6 +35,19 @@ app.get("/health", (_req, res) => {
     res.status(500).json({ status: "error", message: "Database not connected" });
   }
 });
+
+app.get("/metrics", async (_req, res) => {
+  res.set("Content-Type", client.register.contentType);
+  res.end(await client.register.metrics());
+});
+
+const httpRequestCounter = new client.Counter({
+  name: "http_requests_total",
+  help: "Total number of HTTP requests",
+  labelNames: ["method", "route", "status"],
+});
+
+
 
 
 export const AppDataSource = new DataSource({

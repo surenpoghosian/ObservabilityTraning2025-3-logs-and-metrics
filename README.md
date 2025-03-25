@@ -38,3 +38,13 @@ curl -X GET http://localhost:3000/health
 ```sh
 docker logs {your container id}
 ```
+
+### View metrics
+```sh
+curl -X GET http://localhost:3000/metrics
+```
+
+### Access grafana at 
+- url - `http://localhost:3001`
+- username - `admin`
+- password - `admin`
