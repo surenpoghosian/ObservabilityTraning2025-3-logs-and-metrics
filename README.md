@@ -1,5 +1,20 @@
 ## cURL Commands
 
+### View metrics
+```sh
+curl -X GET http://localhost:3000/metrics
+```
+
+### Access grafana at 
+- url - `http://localhost:3001`
+- username - `admin`
+- password - `admin`
+
+look for the counter `http_requests_total`
+
+<img width="1728" alt="Screenshot 2025-03-25 at 18 13 13" src="https://github.com/user-attachments/assets/cc6e218c-1ae8-4418-a7d5-a7bb99017e84" />
+
+
 ### Get all users
 ```sh
 curl -X GET http://localhost:3000/users
@@ -39,14 +54,3 @@ curl -X GET http://localhost:3000/health
 docker logs {your container id}
 ```
 
-### View metrics
-```sh
-curl -X GET http://localhost:3000/metrics
-```
-
-### Access grafana at 
-- url - `http://localhost:3001`
-- username - `admin`
-- password - `admin`
-
-look for the counter `http_requests_total`
