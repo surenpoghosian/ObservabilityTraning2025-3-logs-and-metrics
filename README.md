@@ -33,3 +33,8 @@ curl -X DELETE http://localhost:3000/users/1
 ```sh
 curl -X GET http://localhost:3000/health
 ```
+
+### Viewing logs
+```sh
+docker logs {your container id}
+```
